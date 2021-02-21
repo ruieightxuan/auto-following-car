@@ -2,39 +2,17 @@
 #include "FreeRTOS.h"
 #include "main.h"
 #include "cmsis_os.h"
-uint8_t  TIM3CH1_CAPTURE_STA=0;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				
-uint8_t  TIM3CH2_CAPTURE_STA=0;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				
+uint8_t  TIM2CH3_CAPTURE_STA=0;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				
 uint8_t  TIM3CH3_CAPTURE_STA=0;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				
+uint8_t  TIM4CH3_CAPTURE_STA=0;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				
 
-uint16_t	TIM3CH1_CAPTURE_VAL;							  // ‰»Î≤∂ªÒ÷µ(TIM3 «16Œª)
-uint16_t	TIM3CH2_CAPTURE_VAL;							  // ‰»Î≤∂ªÒ÷µ(TIM3 «16Œª)
+uint16_t	TIM2CH3_CAPTURE_VAL;							  // ‰»Î≤∂ªÒ÷µ(TIM3 «16Œª)
 uint16_t	TIM3CH3_CAPTURE_VAL;							  // ‰»Î≤∂ªÒ÷µ(TIM3 «16Œª)
+uint16_t	TIM4CH3_CAPTURE_VAL;							  // ‰»Î≤∂ªÒ÷µ(TIM3 «16Œª)
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)//∏¸–¬÷–∂œ£®“Á≥ˆ£©∑¢…˙ ±÷¥––
 {
-//	if((TIM3CH1_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ…œ…˝—ÿ
-//	{
-//		if(TIM3CH1_CAPTURE_STA&0X40)				//“—æ≠≤∂ªÒµΩ∏ﬂµÁ∆Ω¡À
-//		{
-//			if((TIM3CH1_CAPTURE_STA&0X3F)==0X3F)	//∏ﬂµÁ∆ΩÃ´≥§¡À
-//			{
-//				TIM3CH1_CAPTURE_STA|=0X80;			//±Íº«≥…π¶≤∂ªÒ¡À“ª¥Œ
-//				TIM3CH1_CAPTURE_VAL=0XFFFF;
-//			}else TIM3CH1_CAPTURE_STA++;
-//		}	 
-//	}		
-//	else if((TIM3CH2_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ…œ…˝—ÿ
-//	{
-//		if(TIM3CH2_CAPTURE_STA&0X40)				//“—æ≠≤∂ªÒµΩ∏ﬂµÁ∆Ω¡À
-//		{
-//			if((TIM3CH2_CAPTURE_STA&0X3F)==0X3F)	//∏ﬂµÁ∆ΩÃ´≥§¡À
-//			{
-//				TIM3CH2_CAPTURE_STA|=0X80;			//±Íº«≥…π¶≤∂ªÒ¡À“ª¥Œ
-//				TIM3CH2_CAPTURE_VAL=0XFFFF;
-//			}else TIM3CH2_CAPTURE_STA++;
-//		}	 
-//	}		
 	if((TIM3CH3_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ…œ…˝—ÿ
 	{
 		if(TIM3CH3_CAPTURE_STA&0X40)				//“—æ≠≤∂ªÒµΩ∏ﬂµÁ∆Ω¡À
@@ -46,50 +24,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)//∏¸–¬÷–∂œ£®“Á≥ˆ£©∑¢…
 			}else TIM3CH3_CAPTURE_STA++;
 		}	 
 	}		
+	if((TIM2CH3_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ…œ…˝—ÿ
+	{
+		if(TIM2CH3_CAPTURE_STA&0X40)				//“—æ≠≤∂ªÒµΩ∏ﬂµÁ∆Ω¡À
+		{
+			if((TIM2CH3_CAPTURE_STA&0X3F)==0X3F)	//∏ﬂµÁ∆ΩÃ´≥§¡À
+			{
+				TIM2CH3_CAPTURE_STA|=0X80;			//±Íº«≥…π¶≤∂ªÒ¡À“ª¥Œ
+				TIM2CH3_CAPTURE_VAL=0XFFFF;
+			}else TIM2CH3_CAPTURE_STA++;
+		}	 
+	}		
+	if((TIM4CH3_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ…œ…˝—ÿ
+	{
+		if(TIM4CH3_CAPTURE_STA&0X40)				//“—æ≠≤∂ªÒµΩ∏ﬂµÁ∆Ω¡À
+		{
+			if((TIM4CH3_CAPTURE_STA&0X3F)==0X3F)	//∏ﬂµÁ∆ΩÃ´≥§¡À
+			{
+				TIM4CH3_CAPTURE_STA|=0X80;			//±Íº«≥…π¶≤∂ªÒ¡À“ª¥Œ
+				TIM4CH3_CAPTURE_VAL=0XFFFF;
+			}else TIM4CH3_CAPTURE_STA++;
+		}	 
+	}		
 }
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//≤∂ªÒ÷–∂œ∑¢…˙ ±÷¥––
 {
-//	if((TIM3CH1_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ
-//	{
-//		if(TIM3CH1_CAPTURE_STA&0X40)				//≤∂ªÒµΩ“ª∏ˆœ¬Ωµ—ÿ 		
-//		{	  			
-//			TIM3CH1_CAPTURE_STA|=0X80;				//±Íº«≥…π¶≤∂ªÒµΩ“ª¥Œ∏ﬂµÁ∆Ω¬ˆøÌ
-//      TIM3CH1_CAPTURE_VAL=HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_1);//ªÒ»°µ±«∞µƒ≤∂ªÒ÷µ.
-//			TIM_RESET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_1);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
-//      TIM_SET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_1,TIM_ICPOLARITY_RISING);//≈‰÷√TIM3Õ®µ¿3…œ…˝—ÿ≤∂ªÒ
-//		}else  										//ªπŒ¥ø™ º,µ⁄“ª¥Œ≤∂ªÒ…œ…˝—ÿ
-//		{
-//			TIM3CH1_CAPTURE_STA=0;					//«Âø’
-//			TIM3CH1_CAPTURE_VAL=0;
-//			TIM3CH1_CAPTURE_STA|=0X40;				//±Íº«≤∂ªÒµΩ¡À…œ…˝—ÿ
-//			__HAL_TIM_DISABLE(&htim3);      	//πÿ±’∂® ±∆˜3
-//			__HAL_TIM_SET_COUNTER(&htim3,0);
-//			TIM_RESET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_1);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
-//			TIM_SET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_1,TIM_ICPOLARITY_FALLING);//∂® ±∆˜3Õ®µ¿3…Ë÷√Œ™œ¬Ωµ—ÿ≤∂ªÒ
-//			__HAL_TIM_ENABLE(&htim3);		// πƒ‹∂® ±∆˜3
-//		}		    
-//	}		
-//	else if((TIM3CH2_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ
-//	{
-//		if(TIM3CH2_CAPTURE_STA&0X40)				//≤∂ªÒµΩ“ª∏ˆœ¬Ωµ—ÿ 		
-//		{	  			
-//			TIM3CH2_CAPTURE_STA|=0X80;				//±Íº«≥…π¶≤∂ªÒµΩ“ª¥Œ∏ﬂµÁ∆Ω¬ˆøÌ
-//      TIM3CH2_CAPTURE_VAL=HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_2);//ªÒ»°µ±«∞µƒ≤∂ªÒ÷µ.
-//			TIM_RESET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_2);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
-//      TIM_SET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_2,TIM_ICPOLARITY_RISING);//≈‰÷√TIM3Õ®µ¿3…œ…˝—ÿ≤∂ªÒ
-//		}else  										//ªπŒ¥ø™ º,µ⁄“ª¥Œ≤∂ªÒ…œ…˝—ÿ
-//		{
-//			TIM3CH2_CAPTURE_STA=0;					//«Âø’
-//			TIM3CH2_CAPTURE_VAL=0;
-//			TIM3CH2_CAPTURE_STA|=0X40;				//±Íº«≤∂ªÒµΩ¡À…œ…˝—ÿ
-//			__HAL_TIM_DISABLE(&htim3);      	//πÿ±’∂® ±∆˜3
-//			__HAL_TIM_SET_COUNTER(&htim3,0);
-//			TIM_RESET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_2);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
-//			TIM_SET_CAPTUREPOLARITY(&htim3,TIM_CHANNEL_2,TIM_ICPOLARITY_FALLING);//∂® ±∆˜3Õ®µ¿3…Ë÷√Œ™œ¬Ωµ—ÿ≤∂ªÒ
-//			__HAL_TIM_ENABLE(&htim3);		// πƒ‹∂® ±∆˜3
-//		}		    
-//	}		
 	if((TIM3CH3_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ
 	{
 		if(TIM3CH3_CAPTURE_STA&0X40)				//≤∂ªÒµΩ“ª∏ˆœ¬Ωµ—ÿ 		
@@ -110,7 +70,52 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//≤∂ªÒ÷–∂œ∑¢…˙ ±÷¥––
 			__HAL_TIM_ENABLE(&htim3);		// πƒ‹∂® ±∆˜3
 		}		    
 	}		
+	if((TIM2CH3_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ
+	{
+		if(TIM2CH3_CAPTURE_STA&0X40)				//≤∂ªÒµΩ“ª∏ˆœ¬Ωµ—ÿ 		
+		{	  			
+			TIM2CH3_CAPTURE_STA|=0X80;				//±Íº«≥…π¶≤∂ªÒµΩ“ª¥Œ∏ﬂµÁ∆Ω¬ˆøÌ
+            TIM2CH3_CAPTURE_VAL=HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_3);//ªÒ»°µ±«∞µƒ≤∂ªÒ÷µ.
+			TIM_RESET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
+            TIM_SET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3,TIM_ICPOLARITY_RISING);//≈‰÷√TIM3Õ®µ¿3…œ…˝—ÿ≤∂ªÒ
+		}else  										//ªπŒ¥ø™ º,µ⁄“ª¥Œ≤∂ªÒ…œ…˝—ÿ
+		{
+			TIM2CH3_CAPTURE_STA=0;					//«Âø’
+			TIM2CH3_CAPTURE_VAL=0;
+			TIM2CH3_CAPTURE_STA|=0X40;				//±Íº«≤∂ªÒµΩ¡À…œ…˝—ÿ
+			__HAL_TIM_DISABLE(&htim2);      	//πÿ±’∂® ±∆˜3
+			__HAL_TIM_SET_COUNTER(&htim2,0);
+			TIM_RESET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
+			TIM_SET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3,TIM_ICPOLARITY_FALLING);//∂® ±∆˜3Õ®µ¿3…Ë÷√Œ™œ¬Ωµ—ÿ≤∂ªÒ
+			__HAL_TIM_ENABLE(&htim2);		// πƒ‹∂® ±∆˜3
+		}		    
+	}		
+	if((TIM4CH3_CAPTURE_STA&0X80)==0)				//ªπŒ¥≥…π¶≤∂ªÒ
+	{
+		if(TIM4CH3_CAPTURE_STA&0X40)				//≤∂ªÒµΩ“ª∏ˆœ¬Ωµ—ÿ 		
+		{	  			
+			TIM4CH3_CAPTURE_STA|=0X80;				//±Íº«≥…π¶≤∂ªÒµΩ“ª¥Œ∏ﬂµÁ∆Ω¬ˆøÌ
+            TIM4CH3_CAPTURE_VAL=HAL_TIM_ReadCapturedValue(&htim4,TIM_CHANNEL_3);//ªÒ»°µ±«∞µƒ≤∂ªÒ÷µ.
+			TIM_RESET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_3);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
+            TIM_SET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_3,TIM_ICPOLARITY_RISING);//≈‰÷√TIM3Õ®µ¿3…œ…˝—ÿ≤∂ªÒ
+		}else  										//ªπŒ¥ø™ º,µ⁄“ª¥Œ≤∂ªÒ…œ…˝—ÿ
+		{
+			TIM4CH3_CAPTURE_STA=0;					//«Âø’
+			TIM4CH3_CAPTURE_VAL=0;
+			TIM4CH3_CAPTURE_STA|=0X40;				//±Íº«≤∂ªÒµΩ¡À…œ…˝—ÿ
+			__HAL_TIM_DISABLE(&htim4);      	//πÿ±’∂® ±∆˜3
+			__HAL_TIM_SET_COUNTER(&htim4,0);
+			TIM_RESET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_3);   //“ª∂®“™œ»«Â≥˝‘≠¿¥µƒ…Ë÷√£°£°
+			TIM_SET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_3,TIM_ICPOLARITY_FALLING);//∂® ±∆˜3Õ®µ¿3…Ë÷√Œ™œ¬Ωµ—ÿ≤∂ªÒ
+			__HAL_TIM_ENABLE(&htim4);		// πƒ‹∂® ±∆˜3
+		}		    
+	}		
 }
+
+
+
+
+
 
 void Trig_Init(void)
 {
@@ -177,7 +182,34 @@ void wave_task(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(10);
+    ch3_capture();  
+		if(TIM3CH3_CAPTURE_STA&0X80)           //≥…π¶≤∂ªÒµΩ¡À“ª¥Œ∏ﬂµÁ∆Ω
+		{
+			time=TIM3CH3_CAPTURE_STA&0X3F; 
+			time*=65536;		 	    	        //“Á≥ˆ ±º‰◊‹∫Õ
+			time+=TIM3CH3_CAPTURE_VAL; 			//µ√µΩ◊‹µƒ∏ﬂµÁ∆Ω ±º‰
+			lenM=time*1.7;
+			TIM3CH3_CAPTURE_STA=0;          //ø™∆Ùœ¬“ª¥Œ≤∂ªÒ
+		}
+		ch1_capture();  
+		if(TIM2CH3_CAPTURE_STA&0X80)           //≥…π¶≤∂ªÒµΩ¡À“ª¥Œ∏ﬂµÁ∆Ω
+		{
+			time=TIM2CH3_CAPTURE_STA&0X3F; 
+			time*=65536;		 	    	        //“Á≥ˆ ±º‰◊‹∫Õ
+			time+=TIM2CH3_CAPTURE_VAL; 			//µ√µΩ◊‹µƒ∏ﬂµÁ∆Ω ±º‰
+			lenL=time*1.7;
+			TIM2CH3_CAPTURE_STA=0;          //ø™∆Ùœ¬“ª¥Œ≤∂ªÒ
+		}
+		ch2_capture();  
+		if(TIM4CH3_CAPTURE_STA&0X80)           //≥…π¶≤∂ªÒµΩ¡À“ª¥Œ∏ﬂµÁ∆Ω
+		{
+			time=TIM4CH3_CAPTURE_STA&0X3F; 
+			time*=65536;		 	    	        //“Á≥ˆ ±º‰◊‹∫Õ
+			time+=TIM4CH3_CAPTURE_VAL; 			//µ√µΩ◊‹µƒ∏ﬂµÁ∆Ω ±º‰
+			lenR=time*1.7;
+			TIM4CH3_CAPTURE_STA=0;          //ø™∆Ùœ¬“ª¥Œ≤∂ªÒ
+		}
+		osDelay(10);
   }
   /* USER CODE END wave_task */
 }

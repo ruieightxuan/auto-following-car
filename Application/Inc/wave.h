@@ -5,12 +5,12 @@
 
 
 #define TRIG1l HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_LEFT_Pin,GPIO_PIN_RESET)
-#define TRIG2l HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_MID_Pin,GPIO_PIN_RESET)
-#define TRIG3l HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_RIGHT_Pin,GPIO_PIN_RESET)
+#define TRIG2l HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_RIGHT_Pin,GPIO_PIN_RESET)
+#define TRIG3l HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_MID_Pin,GPIO_PIN_RESET)
 
 #define TRIG1h HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_LEFT_Pin,GPIO_PIN_SET)
-#define TRIG2h HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_MID_Pin,GPIO_PIN_SET)
-#define TRIG3h HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_RIGHT_Pin,GPIO_PIN_SET)
+#define TRIG2h HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_RIGHT_Pin,GPIO_PIN_SET)
+#define TRIG3h HAL_GPIO_WritePin(GPIOB,WAVE_TRIGGER_MID_Pin,GPIO_PIN_SET)
 
 void Trig_Init(void);
 
@@ -20,7 +20,9 @@ void ch3_capture(void);
 void delay_us(uint32_t udelay);
 
 
+extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 extern uint8_t  TIM3CH1_CAPTURE_STA;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				
 extern uint8_t  TIM3CH2_CAPTURE_STA;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				
 extern uint8_t  TIM3CH3_CAPTURE_STA;							// ‰»Î≤∂ªÒ◊¥Ã¨		    				

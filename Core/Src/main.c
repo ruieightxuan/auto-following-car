@@ -60,7 +60,9 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-   float len=0;
+   float lenL=0;
+	 float lenM=0;
+	 float lenR=0;
 	 uint8_t length=0;
 	 uint32_t time=0; 
 	 uint8_t uwb_index=0;

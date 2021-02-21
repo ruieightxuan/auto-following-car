@@ -37,7 +37,9 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-  extern float len;
+  extern float lenL;
+	extern float lenM;
+	extern float lenR;
 	extern uint8_t length;
 	extern uint32_t time; 
 	extern uint8_t uwb_index;

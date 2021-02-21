@@ -89,7 +89,7 @@ void MX_TIM1_Init(void)
 /* TIM2 init function */
 void MX_TIM2_Init(void)
 {
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
+//  TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_IC_InitTypeDef sConfigIC = {0};
 
   htim2.Instance = TIM2;
@@ -97,17 +97,17 @@ void MX_TIM2_Init(void)
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 65535;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+//  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_IC_Init(&htim2) != HAL_OK)
   {
     Error_Handler();
   }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
+//  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+//  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+//  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
   sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
@@ -116,12 +116,18 @@ void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
+	HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_3);   //开启TIM3的捕获通道3，并且开启捕获中断
+  __HAL_TIM_ENABLE_IT(&htim2,TIM_IT_UPDATE|TIM_IT_CC1);   //使能更新中断
+	
+	HAL_NVIC_SetPriority(TIM2_IRQn,5,0);    //设置中断优先级，抢占优先级2，子优先级0
+  HAL_NVIC_EnableIRQ(TIM2_IRQn);          //开启ITM3中断通道  
+
 
 }
 /* TIM3 init function */
 void MX_TIM3_Init(void)
 {
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
+//  TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_IC_InitTypeDef sConfigIC = {0};
 
   htim3.Instance = TIM3;
@@ -129,17 +135,17 @@ void MX_TIM3_Init(void)
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim3.Init.Period = 65535;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+//  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_IC_Init(&htim3) != HAL_OK)
   {
     Error_Handler();
   }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
+//  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+//  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+//  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
   sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
@@ -148,30 +154,35 @@ void MX_TIM3_Init(void)
   {
     Error_Handler();
   }
+  HAL_TIM_IC_Start_IT(&htim3,TIM_CHANNEL_3);   //开启TIM3的捕获通道3，并且开启捕获中断
+  __HAL_TIM_ENABLE_IT(&htim3,TIM_IT_UPDATE|TIM_IT_CC1);   //使能更新中断
+	
+	HAL_NVIC_SetPriority(TIM3_IRQn,5,0);    //设置中断优先级，抢占优先级2，子优先级0
+  HAL_NVIC_EnableIRQ(TIM3_IRQn);          //开启ITM3中断通道  
 
 }
 /* TIM4 init function */
 void MX_TIM4_Init(void)
 {
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
+//  TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_IC_InitTypeDef sConfigIC = {0};
 
   htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 0;
+  htim4.Init.Prescaler = 7199;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim4.Init.Period = 65535;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+//  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_IC_Init(&htim4) != HAL_OK)
   {
     Error_Handler();
   }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
+//  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+//  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+//  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
   sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
@@ -180,6 +191,11 @@ void MX_TIM4_Init(void)
   {
     Error_Handler();
   }
+  HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_3);   //开启TIM3的捕获通道3，并且开启捕获中断
+  __HAL_TIM_ENABLE_IT(&htim4,TIM_IT_UPDATE|TIM_IT_CC1);   //使能更新中断
+	
+	HAL_NVIC_SetPriority(TIM4_IRQn,5,0);    //设置中断优先级，抢占优先级2，子优先级0
+  HAL_NVIC_EnableIRQ(TIM4_IRQn);          //开启ITM3中断通道  
 
 }
 
