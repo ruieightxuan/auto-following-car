@@ -533,6 +533,11 @@
               <FileType>1</FileType>
               <FilePath>..\Application\Src\wave.c</FilePath>
             </File>
+            <File>
+              <FileName>main_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Src\main_control.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

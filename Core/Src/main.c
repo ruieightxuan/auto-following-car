@@ -67,8 +67,10 @@ void MX_FREERTOS_Init(void);
 	 uint32_t time=0; 
 	 uint8_t uwb_index=0;
 	 uint8_t uwb_index1=0;
-	 uint8_t dist0=0;
-	 uint8_t dist1=0;
+	 uint8_t distl=0;
+	 uint8_t distr=0;
+	 uint8_t last_distl = 0;
+	 uint8_t last_distr = 0;
 	 uint8_t uwb_dist[20]={0};
 /* USER CODE END 0 */
 

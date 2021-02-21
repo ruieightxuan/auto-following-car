@@ -29,6 +29,7 @@
 #include "motor.h"
 #include "uwb.h"
 #include "wave.h"
+#include "main_control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -68,7 +69,7 @@ const osThreadAttr_t wave_attributes = {
 osThreadId_t uwbHandle;
 const osThreadAttr_t uwb_attributes = {
   .name = "uwb",
-  .priority = (osPriority_t) osPriorityNormal1,
+  .priority = (osPriority_t) osPriorityAboveNormal,
   .stack_size = 128 * 4
 };
 /* Definitions for main_control */
@@ -147,16 +148,7 @@ void MX_FREERTOS_Init(void) {
 * @retval None
 */
 /* USER CODE END Header_main_control_task */
-void main_control_task(void *argument)
-{
-  /* USER CODE BEGIN main_control_task */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END main_control_task */
-}
+
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */

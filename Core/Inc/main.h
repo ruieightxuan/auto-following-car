@@ -33,6 +33,7 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -44,8 +45,10 @@ extern "C" {
 	extern uint32_t time; 
 	extern uint8_t uwb_index;
 	extern uint8_t uwb_index1;
-	extern uint8_t dist0;
-	extern uint8_t dist1;
+	extern uint8_t distl;
+	extern uint8_t distr;
+	extern uint8_t last_distl;
+	extern uint8_t last_distr;
 	extern uint8_t uwb_dist[20];
 /* USER CODE END ET */
 

@@ -20,5 +20,5 @@
 void motor_init(void);
 void motor_speed_set(unsigned int speed);
 
-void steer_control(int angle);
+void steer_control(float angle);
 #endif

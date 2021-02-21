@@ -26,7 +26,7 @@ void motor_speed_set(unsigned int speed)
 	}
 }
 // range: -30 to 30 
-void steer_control(int angle)
+void steer_control(float angle)
 {
 	int offset = angle*500/45;
 	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_3,1500 + offset);
@@ -39,9 +39,9 @@ void motor_control_task(void *argument)
   for(;;)
   {	
 		motor_speed_set(SPEED_VERY_LOW);
-		MOTOR_L_FORWARD
-		MOTOR_R_FORWARD
-		steer_control(0);
+		MOTOR_L_STOP
+		MOTOR_R_STOP
+//		steer_control(0.0);
     osDelay(10);
   }
   /* USER CODE END motor_control_task */

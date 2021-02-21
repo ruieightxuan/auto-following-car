@@ -47,8 +47,8 @@ void uwb_task(void *argument)
 			length=USART_RX_STA&0x3fff;//得到此次接收到的数据长度
 			uwb_index=0;
 			uwb_index1=0;
-			dist0=0;
-			dist1=0;
+			distl=0;
+			distr=0;
 			memcpy(uwb_dist,USART_RX_BUF,20*sizeof(uint8_t));
 			for(int i=0;i<length;i++)
 			{
@@ -61,17 +61,14 @@ void uwb_task(void *argument)
 				uwb_index1=i;
 				}			
 			}
-			
 			for(int i=uwb_index+1;i<uwb_index1;i++)
 			{
-			dist0=dist0*10+(uwb_dist[i]-'0');
+			distr=distr*10+(uwb_dist[i]-'0');
 			}
 			for(int i=uwb_index1+1;i<length;i++)
 			{
-			dist1=dist1*10+(uwb_dist[i]-'0');
+			distl=distl*10+(uwb_dist[i]-'0');
 			}
-			
-			
 			USART_RX_STA=0;
 		}
 		osDelay(10);
