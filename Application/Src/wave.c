@@ -1,7 +1,7 @@
 #include "wave.h"
 #include "FreeRTOS.h"
 #include "main.h"
-
+#include "cmsis_os.h"
 uint8_t  TIM3CH1_CAPTURE_STA=0;							//输入捕获状态		    				
 uint8_t  TIM3CH2_CAPTURE_STA=0;							//输入捕获状态		    				
 uint8_t  TIM3CH3_CAPTURE_STA=0;							//输入捕获状态		    				
@@ -177,7 +177,7 @@ void wave_task(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    
+    osDelay(10);
   }
   /* USER CODE END wave_task */
 }

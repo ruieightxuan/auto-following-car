@@ -1,6 +1,7 @@
 #include "uwb.h"
 #include "FreeRTOS.h"
 #include "main.h"
+#include "cmsis_os.h"
 
 uint8_t USART_RX_BUF[USART_REC_LEN];
 uint16_t USART_RX_STA=0;       //接收状态标记	
@@ -73,6 +74,7 @@ void uwb_task(void *argument)
 			
 			USART_RX_STA=0;
 		}
+		osDelay(10);
   }
   /* USER CODE END uwb_task */
 }

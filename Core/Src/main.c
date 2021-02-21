@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "wave.h"
 #include "uwb.h"
+#include "motor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,6 +105,7 @@ int main(void)
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
 	Trig_Init();
+	motor_init();
 	HAL_UART_Receive_IT(&huart1,(uint8_t *)aRxBuffer,1);
 	 
   /* USER CODE END 2 */
@@ -122,10 +124,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		
-		
-		
-		
   }
   /* USER CODE END 3 */
 }

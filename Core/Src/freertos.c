@@ -140,60 +140,6 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_motor_control_task */
-/**
-  * @brief  Function implementing the motor_control thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_motor_control_task */
-void motor_control_task(void *argument)
-{
-  /* USER CODE BEGIN motor_control_task */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END motor_control_task */
-}
-
-/* USER CODE BEGIN Header_wave_task */
-/**
-* @brief Function implementing the wave thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_wave_task */
-//void wave_task(void *argument)
-//{
-//  /* USER CODE BEGIN wave_task */
-//  /* Infinite loop */
-//  for(;;)
-//  {
-//    osDelay(1);
-//  }
-//  /* USER CODE END wave_task */
-//}
-
-/* USER CODE BEGIN Header_uwb_task */
-/**
-* @brief Function implementing the uwb thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_uwb_task */
-//void uwb_task(void *argument)
-//{
-//  /* USER CODE BEGIN uwb_task */
-//  /* Infinite loop */
-//  for(;;)
-//  {
-//    osDelay(1);
-//  }
-//  /* USER CODE END uwb_task */
-//}
-
 /* USER CODE BEGIN Header_main_control_task */
 /**
 * @brief Function implementing the main_control thread.
