@@ -14,8 +14,16 @@ void motor_init(void)
 
 void motor_speed_set(unsigned int speed)
 {
+	if 	(speed == SPEED_VERY_LOW)
+	{
+		__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_1,6000);	//very slow 
+		__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_2,6000);
+	}
+	else
+	{
 		__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_1,speed*4000);	//20000/5 = 4000 FULL SPEED:20000
 		__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_2,speed*4000);
+	}
 }
 // range: -30 to 30 
 void steer_control(int angle)
@@ -30,7 +38,7 @@ void motor_control_task(void *argument)
   /* Infinite loop */
   for(;;)
   {	
-		motor_speed_set(SPEED_MID);
+		motor_speed_set(SPEED_VERY_LOW);
 		MOTOR_L_FORWARD
 		MOTOR_R_FORWARD
 		steer_control(0);
