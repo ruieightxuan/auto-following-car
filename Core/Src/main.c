@@ -19,13 +19,15 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "wave.h"
+#include "uwb.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,13 +52,21 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+   float len=0;
+	 uint8_t length=0;
+	 uint32_t time=0; 
+	 uint8_t uwb_index=0;
+	 uint8_t uwb_index1=0;
+	 uint8_t dist0=0;
+	 uint8_t dist1=0;
+	 uint8_t uwb_dist[20]={0};
 /* USER CODE END 0 */
 
 /**
@@ -90,10 +100,21 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM3_Init();
   MX_USART1_UART_Init();
+  MX_TIM2_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
+	Trig_Init();
+	HAL_UART_Receive_IT(&huart1,(uint8_t *)aRxBuffer,1);
+	 
   /* USER CODE END 2 */
 
+  /* Init scheduler */
+  osKernelInitialize();  /* Call init function for freertos objects (in freertos.c) */
+  MX_FREERTOS_Init();
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -101,6 +122,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		
+		
+		
+		
   }
   /* USER CODE END 3 */
 }

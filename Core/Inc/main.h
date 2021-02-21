@@ -32,12 +32,19 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+  extern float len;
+	extern uint8_t length;
+	extern uint32_t time; 
+	extern uint8_t uwb_index;
+	extern uint8_t uwb_index1;
+	extern uint8_t dist0;
+	extern uint8_t dist1;
+	extern uint8_t uwb_dist[20];
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
