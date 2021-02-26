@@ -42,7 +42,9 @@ extern "C" {
 	extern float lenM;
 	extern float lenR;
 	extern uint8_t length;
-	extern uint32_t time; 
+	extern uint32_t timeL; 
+	extern uint32_t timeM;
+	extern uint32_t timeR;
 	extern uint8_t uwb_index;
 	extern uint8_t uwb_index1;
 	extern uint8_t distl;

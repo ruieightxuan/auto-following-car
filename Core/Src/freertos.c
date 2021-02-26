@@ -30,6 +30,7 @@
 #include "uwb.h"
 #include "wave.h"
 #include "main_control.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,7 +64,7 @@ osThreadId_t waveHandle;
 const osThreadAttr_t wave_attributes = {
   .name = "wave",
   .priority = (osPriority_t) osPriorityNormal1,
-  .stack_size = 128 * 4
+  .stack_size = 64 * 4
 };
 /* Definitions for uwb */
 osThreadId_t uwbHandle;
@@ -82,13 +83,27 @@ const osThreadAttr_t main_control_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
+osThreadId_t wavem_controlHandle;
+const osThreadAttr_t wavem_attributes = {
+  .name = "wavem",
+  .priority = (osPriority_t) osPriorityNormal1,
+  .stack_size = 64 * 4
+};
 
+osThreadId_t waver_controlHandle;
+const osThreadAttr_t waver_attributes = {
+  .name = "waver",
+  .priority = (osPriority_t) osPriorityNormal1,
+  .stack_size = 64 * 4
+};
 /* USER CODE END FunctionPrototypes */
 
 void motor_control_task(void *argument);
 void wave_task(void *argument);
 void uwb_task(void *argument);
 void main_control_task(void *argument);
+void wavem_task(void *argument);
+void waver_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -133,6 +148,8 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
+	 wavem_controlHandle = osThreadNew(wavem_task, NULL, &wavem_attributes);
+	 waver_controlHandle = osThreadNew(waver_task, NULL, &waver_attributes);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */

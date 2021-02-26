@@ -129,6 +129,7 @@ void ch1_capture(void)
 			TRIG1h;
 			delay_us(20);
 			TRIG1l;
+	    timeL=0;
 	    
 }
 void ch2_capture(void)
@@ -136,6 +137,7 @@ void ch2_capture(void)
 			TRIG2h;
 			delay_us(20);
 			TRIG2l;
+	    timeM=0;
 	   
 }
 void ch3_capture(void)
@@ -143,6 +145,7 @@ void ch3_capture(void)
 			TRIG3h;
 			delay_us(20);
 			TRIG3l;
+	    timeR=0;
 
 }
 
@@ -163,8 +166,8 @@ void delay_us(uint32_t udelay)
       wait = 72000 + startval - delays;
       while(wait < SysTick->VAL)
         {
- 
-        }
+				
+				}
     }
   else
     {
@@ -182,31 +185,110 @@ void wave_task(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    ch3_capture();  
-		if(TIM3CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
-		{
-			time=TIM3CH3_CAPTURE_STA&0X3F; 
-			time*=65536;		 	    	        //溢出时间总和
-			time+=TIM3CH3_CAPTURE_VAL; 			//得到总的高电平时间
-			lenM=time*1.7;
-			TIM3CH3_CAPTURE_STA=0;          //开启下一次捕获
-		}
+//    ch2_capture();  
+//		if(TIM3CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+//		{
+//			timeM=TIM3CH3_CAPTURE_STA&0X3F; 
+//			timeM*=65536;		 	    	        //溢出时间总和
+//			timeM+=TIM3CH3_CAPTURE_VAL; 			//得到总的高电平时间
+//			lenM=timeM*1.7;
+//			TIM3CH3_CAPTURE_STA=0;          //开启下一次捕获
+//		}
 		ch1_capture();  
 		if(TIM2CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
 		{
-			time=TIM2CH3_CAPTURE_STA&0X3F; 
-			time*=65536;		 	    	        //溢出时间总和
-			time+=TIM2CH3_CAPTURE_VAL; 			//得到总的高电平时间
-			lenL=time*1.7;
+			timeL=TIM2CH3_CAPTURE_STA&0X3F; 
+			timeL*=65536;		 	    	        //溢出时间总和
+			timeL+=TIM2CH3_CAPTURE_VAL; 			//得到总的高电平时间
+			lenL=timeL*1.7;
+			if(lenL<7) lenL=170;
 			TIM2CH3_CAPTURE_STA=0;          //开启下一次捕获
 		}
-		ch2_capture();  
+//		ch3_capture();  
+//		if(TIM4CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+//		{
+//			timeR=TIM4CH3_CAPTURE_STA&0X3F; 
+//			timeR*=65536;		 	    	        //溢出时间总和
+//			timeR+=TIM4CH3_CAPTURE_VAL; 			//得到总的高电平时间
+//			lenR=timeR*1.7;
+//			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
+//		}
+		osDelay(10);
+  }
+  /* USER CODE END wave_task */
+}
+
+void wavem_task(void *argument)
+{
+  /* USER CODE BEGIN wave_task */
+  /* Infinite loop */
+  for(;;)
+  {
+    ch2_capture();  
+		if(TIM3CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+		{
+			timeM=TIM3CH3_CAPTURE_STA&0X3F; 
+			timeM*=65536;		 	    	        //溢出时间总和
+			timeM+=TIM3CH3_CAPTURE_VAL; 			//得到总的高电平时间
+			lenM=timeM*1.7;
+			if(lenM<7) lenM=170;
+			TIM3CH3_CAPTURE_STA=0;          //开启下一次捕获
+		}
+//		ch1_capture();  
+//		if(TIM2CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+//		{
+//			timeL=TIM2CH3_CAPTURE_STA&0X3F; 
+//			timeL*=65536;		 	    	        //溢出时间总和
+//			timeL+=TIM2CH3_CAPTURE_VAL; 			//得到总的高电平时间
+//			lenL=timeL*1.7;
+//			TIM2CH3_CAPTURE_STA=0;          //开启下一次捕获
+//		}
+//		ch3_capture();  
+//		if(TIM4CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+//		{
+//			timeR=TIM4CH3_CAPTURE_STA&0X3F; 
+//			timeR*=65536;		 	    	        //溢出时间总和
+//			timeR+=TIM4CH3_CAPTURE_VAL; 			//得到总的高电平时间
+//			lenR=timeR*1.7;
+//			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
+//		}
+		osDelay(10);
+  }
+  /* USER CODE END wave_task */
+}
+
+void waver_task(void *argument)
+{
+  /* USER CODE BEGIN wave_task */
+  /* Infinite loop */
+  for(;;)
+  {
+//    ch2_capture();  
+//		if(TIM3CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+//		{
+//			timeM=TIM3CH3_CAPTURE_STA&0X3F; 
+//			timeM*=65536;		 	    	        //溢出时间总和
+//			timeM+=TIM3CH3_CAPTURE_VAL; 			//得到总的高电平时间
+//			lenM=timeM*1.7;
+//			TIM3CH3_CAPTURE_STA=0;          //开启下一次捕获
+//		}
+//		ch1_capture();  
+//		if(TIM2CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+//		{
+//			timeL=TIM2CH3_CAPTURE_STA&0X3F; 
+//			timeL*=65536;		 	    	        //溢出时间总和
+//			timeL+=TIM2CH3_CAPTURE_VAL; 			//得到总的高电平时间
+//			lenL=timeL*1.7;
+//			TIM2CH3_CAPTURE_STA=0;          //开启下一次捕获
+//		}
+		ch3_capture();  
 		if(TIM4CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
 		{
-			time=TIM4CH3_CAPTURE_STA&0X3F; 
-			time*=65536;		 	    	        //溢出时间总和
-			time+=TIM4CH3_CAPTURE_VAL; 			//得到总的高电平时间
-			lenR=time*1.7;
+			timeR=TIM4CH3_CAPTURE_STA&0X3F; 
+			timeR*=65536;		 	    	        //溢出时间总和
+			timeR+=TIM4CH3_CAPTURE_VAL; 			//得到总的高电平时间
+			lenR=timeR*1.7;
+			if(lenR<7) lenR=170;
 			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
 		}
 		osDelay(10);

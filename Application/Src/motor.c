@@ -38,9 +38,11 @@ void motor_control_task(void *argument)
   /* Infinite loop */
   for(;;)
   {	
-		motor_speed_set(SPEED_VERY_LOW);
-		MOTOR_L_STOP
-		MOTOR_R_STOP
+//		motor_speed_set(SPEED_VERY_LOW);
+//		MOTOR_L_STOP
+//		MOTOR_R_STOP
+//		MOTOR_L_FORWARD
+//		MOTOR_R_FORWARD
 //		steer_control(0.0);
     osDelay(10);
   }
