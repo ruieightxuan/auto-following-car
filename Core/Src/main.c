@@ -112,6 +112,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	Trig_Init();
 	motor_init();
+	steer_control(0);
 	HAL_UART_Receive_IT(&huart1,(uint8_t *)aRxBuffer,1);
 	 
   /* USER CODE END 2 */
