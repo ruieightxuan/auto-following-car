@@ -4,12 +4,12 @@
 #include "cmsis_os.h"
 #include "motor.h"
 
-float x_distl=0;
-float x_distr=0;
+
 
 float distl_ave = 0.0;
 float distr_ave = 0.0;
 float distlr_ave = 0.0;
+
 float deleta=0;
 float deleta_origin=0;
 float duoji=0;
@@ -27,27 +27,16 @@ void main_control_task(void *argument)
 		//distl_ave += 20;
 		
 		distlr_ave = (distl_ave + distr_ave)*0.5;
-    x_distl=sqrt((distl_ave*distl_ave-6400));
-		x_distr=sqrt((distr_ave*distr_ave-6400));
-		deleta=x_distr-x_distl;
-		deleta_origin=distr_ave-distl_ave;
+
+		deleta_origin=distr_ave-distl_ave;	//左右距离的差值
 		last_distl = distl;
 		last_distr = distr;
 		
 		/*模式控制begin*/
 		//速度控制
-		if (distlr_ave<150)
-		{
-			motor_speed_set(SPEED_MID);
-		}
-		else if ((distl_ave>150)&&(distl_ave<300))
-		{
-			motor_speed_set(SPEED_HIGH);
-		}
-		else 
-		{
-			motor_speed_set(SPEED_VERY_HIGH);
-		}
+		if (distlr_ave<100) motor_speed_set(SPEED_MID);
+		else if ((distl_ave>100)&&(distl_ave<200)) motor_speed_set(SPEED_HIGH);
+		else 	motor_speed_set(SPEED_VERY_HIGH);
 		
 		if((lenM<50&&lenM>8)||(lenL<50&&lenL>25.5)||(lenR<50&&lenR>10))//测距模式
 		{
@@ -83,8 +72,12 @@ void main_control_task(void *argument)
 			MOTOR_L_FORWARD
 			MOTOR_R_FORWARD
 			
-			duoji=-deleta_origin*0.5; //误差折算成角度
-			if(duoji<0)duoji*=1.2;		//舵机误差校正
+			if(distlr_ave<100) duoji=-deleta_origin*0.5; //误差折算成角度,距离越近，偏转系数越大
+			else if ((distl_ave>100)&&(distl_ave<200))  duoji=-deleta_origin*0.4; 
+			else duoji=-deleta_origin*0.35; 
+			
+			if(duoji<0)duoji*=1.2;		//舵机误差校正,向左偏的时候不太灵敏
+			
 			//舵机限幅
 			if(duoji>29) duoji=29;		
 			else if(duoji<-37) duoji=-37;
