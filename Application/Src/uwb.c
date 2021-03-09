@@ -63,11 +63,11 @@ void uwb_task(void *argument)
 			}
 			for(int i=uwb_index+1;i<uwb_index1;i++)
 			{
-			distl=distl*10+(uwb_dist[i]-'0');
+			distl=distl*10+(uwb_dist[i]-'0');		//×ó±ß¾àÀë
 			}
 			for(int i=uwb_index1+1;i<length;i++)
 			{
-			distr=distr*10+(uwb_dist[i]-'0');
+			distr=distr*10+(uwb_dist[i]-'0');   //ÓÒ±ß¾àÀë
 			}
 			USART_RX_STA=0;
 		}
