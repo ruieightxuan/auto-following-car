@@ -75,9 +75,9 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//捕获中断发生时执行
 		if(TIM2CH3_CAPTURE_STA&0X40)				//捕获到一个下降沿 		
 		{	  			
 			TIM2CH3_CAPTURE_STA|=0X80;				//标记成功捕获到一次高电平脉宽
-            TIM2CH3_CAPTURE_VAL=HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_3);//获取当前的捕获值.
-			TIM_RESET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3);   //一定要先清除原来的设置！！
-            TIM_SET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3,TIM_ICPOLARITY_RISING);//配置TIM3通道3上升沿捕获
+            TIM2CH3_CAPTURE_VAL=HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_4);//获取当前的捕获值.
+			TIM_RESET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_4);   //一定要先清除原来的设置！！
+            TIM_SET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_4,TIM_ICPOLARITY_RISING);//配置TIM3通道3上升沿捕获
 		}else  										//还未开始,第一次捕获上升沿
 		{
 			TIM2CH3_CAPTURE_STA=0;					//清空
@@ -85,8 +85,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//捕获中断发生时执行
 			TIM2CH3_CAPTURE_STA|=0X40;				//标记捕获到了上升沿
 			__HAL_TIM_DISABLE(&htim2);      	//关闭定时器3
 			__HAL_TIM_SET_COUNTER(&htim2,0);
-			TIM_RESET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3);   //一定要先清除原来的设置！！
-			TIM_SET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_3,TIM_ICPOLARITY_FALLING);//定时器3通道3设置为下降沿捕获
+			TIM_RESET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_4);   //一定要先清除原来的设置！！
+			TIM_SET_CAPTUREPOLARITY(&htim2,TIM_CHANNEL_4,TIM_ICPOLARITY_FALLING);//定时器3通道3设置为下降沿捕获
 			__HAL_TIM_ENABLE(&htim2);		//使能定时器3
 		}		    
 	}		
@@ -204,6 +204,31 @@ void wave_task(void *argument)
 			if(lenL<7) lenL=170;
 			TIM2CH3_CAPTURE_STA=0;          //开启下一次捕获
 		}
+		delay_us(100);
+		
+		ch2_capture();  
+		if(TIM3CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+		{
+			timeM=TIM3CH3_CAPTURE_STA&0X3F; 
+			timeM*=65536;		 	    	        //溢出时间总和
+			timeM+=TIM3CH3_CAPTURE_VAL; 			//得到总的高电平时间
+			lenM=timeM*1.7;
+			if(lenM<7) lenM=170;
+			TIM3CH3_CAPTURE_STA=0;          //开启下一次捕获
+		}
+		delay_us(100);
+		
+		ch3_capture();  
+		if(TIM4CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+		{
+			timeR=TIM4CH3_CAPTURE_STA&0X3F; 
+			timeR*=65536;		 	    	        //溢出时间总和
+			timeR+=TIM4CH3_CAPTURE_VAL; 			//得到总的高电平时间
+			lenR=timeR*1.7;
+			if(lenR<7) lenR=170;
+			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
+		}
+		delay_us(100);
 //		ch3_capture();  
 //		if(TIM4CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
 //		{
@@ -213,7 +238,7 @@ void wave_task(void *argument)
 //			lenR=timeR*1.7;
 //			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
 //		}
-		osDelay(10);
+		osDelay(5);
   }
   /* USER CODE END wave_task */
 }
@@ -224,16 +249,16 @@ void wavem_task(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    ch2_capture();  
-		if(TIM3CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
-		{
-			timeM=TIM3CH3_CAPTURE_STA&0X3F; 
-			timeM*=65536;		 	    	        //溢出时间总和
-			timeM+=TIM3CH3_CAPTURE_VAL; 			//得到总的高电平时间
-			lenM=timeM*1.7;
-			if(lenM<7) lenM=170;
-			TIM3CH3_CAPTURE_STA=0;          //开启下一次捕获
-		}
+////    ch2_capture();  
+////		if(TIM3CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+////		{
+////			timeM=TIM3CH3_CAPTURE_STA&0X3F; 
+////			timeM*=65536;		 	    	        //溢出时间总和
+////			timeM+=TIM3CH3_CAPTURE_VAL; 			//得到总的高电平时间
+////			lenM=timeM*1.7;
+////			if(lenM<7) lenM=170;
+////			TIM3CH3_CAPTURE_STA=0;          //开启下一次捕获
+////		}
 //		ch1_capture();  
 //		if(TIM2CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
 //		{
@@ -252,7 +277,7 @@ void wavem_task(void *argument)
 //			lenR=timeR*1.7;
 //			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
 //		}
-		osDelay(10);
+		osDelay(1);
   }
   /* USER CODE END wave_task */
 }
@@ -281,17 +306,17 @@ void waver_task(void *argument)
 //			lenL=timeL*1.7;
 //			TIM2CH3_CAPTURE_STA=0;          //开启下一次捕获
 //		}
-		ch3_capture();  
-		if(TIM4CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
-		{
-			timeR=TIM4CH3_CAPTURE_STA&0X3F; 
-			timeR*=65536;		 	    	        //溢出时间总和
-			timeR+=TIM4CH3_CAPTURE_VAL; 			//得到总的高电平时间
-			lenR=timeR*1.7;
-			if(lenR<7) lenR=170;
-			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
-		}
-		osDelay(10);
+////		ch3_capture();  
+////		if(TIM4CH3_CAPTURE_STA&0X80)           //成功捕获到了一次高电平
+////		{
+////			timeR=TIM4CH3_CAPTURE_STA&0X3F; 
+////			timeR*=65536;		 	    	        //溢出时间总和
+////			timeR+=TIM4CH3_CAPTURE_VAL; 			//得到总的高电平时间
+////			lenR=timeR*1.7;
+////			if(lenR<7) lenR=170;
+////			TIM4CH3_CAPTURE_STA=0;          //开启下一次捕获
+////		}
+		osDelay(1);
   }
   /* USER CODE END wave_task */
 }

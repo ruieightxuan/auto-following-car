@@ -112,11 +112,11 @@ void MX_TIM2_Init(void)
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
   sConfigIC.ICFilter = 0;
-  if (HAL_TIM_IC_ConfigChannel(&htim2, &sConfigIC, TIM_CHANNEL_3) != HAL_OK)
+  if (HAL_TIM_IC_ConfigChannel(&htim2, &sConfigIC, TIM_CHANNEL_4) != HAL_OK)
   {
     Error_Handler();
   }
-	HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_3);   //开启TIM3的捕获通道3，并且开启捕获中断
+	HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_4);   //开启TIM3的捕获通道3，并且开启捕获中断
   __HAL_TIM_ENABLE_IT(&htim2,TIM_IT_UPDATE|TIM_IT_CC1);   //使能更新中断
 	
 	HAL_NVIC_SetPriority(TIM2_IRQn,5,0);    //设置中断优先级，抢占优先级2，子优先级0
@@ -231,7 +231,7 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef* tim_icHandle)
     /**TIM2 GPIO Configuration
     PB10     ------> TIM2_CH3
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_10;
+    GPIO_InitStruct.Pin = GPIO_PIN_11;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
