@@ -1,0 +1,15 @@
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/queue.c
+smartcar\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+smartcar\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+smartcar\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+smartcar\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+smartcar\queue.o: ../Core/Inc/FreeRTOSConfig.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+smartcar\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h

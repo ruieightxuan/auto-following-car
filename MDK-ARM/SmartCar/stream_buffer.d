@@ -1,0 +1,14 @@
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
+smartcar\stream_buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+smartcar\stream_buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+smartcar\stream_buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+smartcar\stream_buffer.o: ../Core/Inc/FreeRTOSConfig.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+smartcar\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h
